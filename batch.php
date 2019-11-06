@@ -42,6 +42,7 @@ add_action( 'enqueue_block_editor_assets', 'enqueue_block_editor_assets' );
 function enqueue_block_editor_assets() {
 	// Make paths variables so we don't write em twice ;)
 	$block_path = '/dist/js/editor.blocks.js';
+	$style_path = '/dist/css/blocks.editor.css';
 	// Enqueue the bundled block JS file
 	wp_enqueue_script(
 		'batch-blocks',
@@ -50,10 +51,10 @@ function enqueue_block_editor_assets() {
 		filemtime( _get_plugin_directory() . $block_path )
 	);
 	// Enqueue optional editor only styles
-	// wp_enqueue_style(
-	// 	'jsforwp-blocks-editor-css',
-	// 	_get_plugin_url() . $style_path,
-	// 	[ ],
-	// 	filemtime( _get_plugin_directory() . $style_path )
-	// );
+	wp_enqueue_style(
+		'jsforwp-blocks-editor-css',
+		_get_plugin_url() . $style_path,
+		[ ],
+		filemtime( _get_plugin_directory() . $style_path )
+	);
 }

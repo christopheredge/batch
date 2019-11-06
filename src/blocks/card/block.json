@@ -2,17 +2,20 @@
   "name": "batch/card",
   "category": "batch",
   "attributes": {
-    "bgURL": {
-      "type": "string"
+    "cardHeading": {
+      "source": "html",
+      "selector": "h2"
     },
-    "bgALT": {
-      "type": "string"
-    },
-    "bgID": {
-      "type": "number"
+    "cardParagraph": {
+      "source": "html",
+      "selector": "p"
     },
     "cardUrl": {
       "type": "string"
+    },
+    "checkboxField": {
+      "type": "boolean",
+      "default": true
     }
   }
 }

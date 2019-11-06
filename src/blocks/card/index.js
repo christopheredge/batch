@@ -1,7 +1,7 @@
 /*
  * Styles
  */
-
+import './styles/editor.scss';
 /*
  * Plugin dependencies
  */

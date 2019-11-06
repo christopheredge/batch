@@ -1,65 +1,53 @@
 /*
  * Plugin dependencies
  */
-
+import Inspector from './inspector';
 /*
  * WordPress dependencies
  */
-const { __, _x } = wp.i18n;
-const { Component, Fragment } = wp.element;
-import { InnerBLocks, MediaUpload, LinkControl } from '@wordpress/block-editor';
-const { Button } = wp.components;
+import { __ } from '@wordpress/i18n';
+import { Component, Fragment } from '@wordpress/element';
+const { LinkControl, RichText, URLInputButton } = wp.blockEditor;
+import { Button } from '@wordpress/components';
 /*
- * Allowed blocks
+ * Allowed blocks & Template
  */
- /*
-  * Edit Function
-  */
+/*
+ * Edit Function
+ */
 class Edit extends Component {
   render() {
     const { attributes, className, setAttributes, isSelected } = this.props;
-    const {
-      bgURL,
-      bgALT,
-      bgID,
-    } = attributes;
-    const onSelectImage = img => {
-      setAttributes({
-        bgURL: img.url,
-        bgALT: img.alt,
-        bgID: img.id,
-      });
-    };
-    const onRemoveImg = () => {
-      setAttributes({
-        bgUrl: null,
-        bgALT: null,
-        bgID: null,
-      });
-    };
+    const { cardHeading, cardParagraph, cardUrl, checkboxField } = attributes;
     return (
       <Fragment>
-        {! bgID ? (
-            <MediaUpload
-              onSelect= { onSelectImage }
-              type='image'
-              render={ ( { open } ) => (
-              <Button
-                  className={ 'button button-large' }
-                  onClick={ open }
-                  >
-                    { __('Upload Image') }
-                  </Button>
-              ) }
-              >
-            </MediaUpload>
-        ) : (
-          <div class="card" style={ {backgroundImage: `url(${bgURL})`}}>
-            { isSelected ? (
-              <Button className="button button-large" onClick={ onRemoveImg }>Remove Image</Button>
-            ) : null }
+        <Inspector { ...this.props } />
+        <div class="batch-card">
+          <div class="batch-card__content">
+            <div class="batch-card__title">
+              <RichText
+                tagName="h2"
+                placeholder="Card Heading"
+                value={ cardHeading }
+                onChange={ ( cardHeading ) => setAttributes( { cardHeading } ) }
+              />
+            </div>
+            <div class="batch-card__description">
+              <RichText
+                tagName="p"
+                placeholder="Card description..."
+                value={ cardParagraph }
+                onChange={ ( cardParagraph ) => setAttributes( { cardParagraph } ) }
+              />
+            </div>
           </div>
-        ) }
+          <div class="batch-card__nav">
+            <URLInputButton
+              url={ cardUrl }
+              onChange={ ( cardUrl ) => setAttributes( { cardUrl } ) }
+            />
+          </div>
+        </div>
       </Fragment>
     );
   }

@@ -52,10 +52,12 @@ module.exports = {
       },
       {
         test: /style\.s?css$/,
+        exclude: /node_modules/,
         use: blocksCSSPlugin.extract( extractConfig ),
       },
       {
         test: /editor\.s?css$/,
+        exclude: /node_modules/,
         use: editBlocksCSSPlugin.extract( extractConfig ),
       },
     ],

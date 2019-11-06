@@ -1,0 +1,11 @@
+.batch{
+  &-card{
+    background-color: #22325B;
+    width: 100%;
+    &__title{
+      h2{
+        color: grey;
+      }
+    }
+  }
+}
